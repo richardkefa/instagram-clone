@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{image.image.url}}" alt="{{image.image_name}}" class="img-fluid">
+      <p>{{image.image_caption}}</p><br>
+      <p class="text-muted"><small>Posted by</small> {{image.author}} on {{image.post_date|date:"F d, Y"}}</p>
+        {%if image.author == user %}
+        <a class="btn-danger btn-sm mt-1 mb-1" href="{% url 'post_delete' image.pk %}">Delete Post</a>
+        
+        {% endif %}
+      <div>
+        <form  action="{% url 'one_image' image.pk %}" method="POST">
+          {%csrf_token%}
+          <div class="text-center">{{commentform}}<button type="submit" class="btn btn-primary">Post</button></div> 
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {% if comments.image == image.pk %}
+      
+      {% for comment in comments %}
+        <div class="cards">
+          <p>{{comment.comment}}</p>
+        </div>
+      {% endfor %}
+      {% else %}
+      <h3>No comments</h3>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

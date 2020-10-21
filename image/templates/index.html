@@ -1,1 +1,24 @@
-{{title}}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  {% for image in images %}
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8 mb-4">
+      <img class="rounded-circle account-img img-fluid" src="image.author.profiles.profile_pic.url" alt="{{image.author.profiles.bio}}">
+
+      <img src="{{image.image.url}}" alt="{{image.image_name}}" class="img-fluid">
+      <div class="pt-2">
+        <a class="btn btn-small mr-2 btn-outline-info" href="{% url 'one_image' image.pk %}">Comments</a>
+        <small id="postdate" class="text-muted">{{image.post_date|date:"F d, Y"}}</small>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+
+  </div>
+
+  {% endfor %}
+</div>
+{% endblock %}
