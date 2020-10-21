@@ -85,19 +85,20 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 if config('MODE')=="dev":
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+        }
     }
-}
-
+    
 # production
 else:
-   DATABASES = {
+    
+    DATABASES = {
        'default': dj_database_url.config(
         default=config('DATABASE_URL')
        )
